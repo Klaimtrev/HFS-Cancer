@@ -1,9 +1,13 @@
+import time
 from data_processing import load_and_preprocess_data
 from feature_selection import select_top_30_percent_features, cfs_selection
 from tests import test_decision_tree, test_knn
 
 # Load and preprocess the data
 X_train, X_test, y_train, y_test, df, label_encoder = load_and_preprocess_data('Datasets/AP_Colon_Kidney.arff')
+
+# Timer for original dataset tests
+start_time_original = time.time()
 
 # Train and evaluate models on the original dataset
 print("### Original Dataset Results ###")
@@ -12,6 +16,13 @@ print(f"Decision Tree - Accuracy: {dt_accuracy:.4f}, F1 Score: {dt_f1:.4f}, MCC:
 
 knn_accuracy, knn_f1, knn_mcc = test_knn(X_train, y_train, X_test, y_test)
 print(f"KNN - Accuracy: {knn_accuracy:.4f}, F1 Score: {knn_f1:.4f}, MCC: {knn_mcc:.4f}\n")
+
+end_time_original = time.time()
+original_time_taken = end_time_original - start_time_original
+print(f"Time taken for original dataset tests: {original_time_taken:.2f} seconds\n")
+
+# Timer for feature selection (top 30%) and CFS
+start_time_top_30 = time.time()
 
 # Feature Selection with top 30%
 print("### Feature Selection (Top 30%) ###")
@@ -32,6 +43,13 @@ print(f"Decision Tree - Accuracy: {dt_accuracy_selected_30:.4f}, F1 Score: {dt_f
 knn_accuracy_selected_30, knn_f1_selected_30, knn_mcc_selected_30 = test_knn(X_train_selected_top_30, y_train, X_test_selected_top_30, y_test)
 print(f"KNN - Accuracy: {knn_accuracy_selected_30:.4f}, F1 Score: {knn_f1_selected_30:.4f}, MCC: {knn_mcc_selected_30:.4f}\n")
 
+end_time_top_30 = time.time()
+top_30_time_taken = end_time_top_30 - start_time_top_30
+print(f"Time taken for feature selection (Top 30%) and tests: {top_30_time_taken:.2f} seconds\n")
+
+# Timer for CFS without top 30% and tests
+start_time_cfs_only = time.time()
+
 # Perform CFS on the original dataset without selecting top 30%
 print("### Feature Selection (Without Top 30%) ###")
 selected_feature_names = cfs_selection(X_train, y_train)
@@ -45,3 +63,7 @@ print(f"Decision Tree - Accuracy: {dt_accuracy_selected:.4f}, F1 Score: {dt_f1_s
 
 knn_accuracy_selected, knn_f1_selected, knn_mcc_selected = test_knn(X_train_selected, y_train, X_test_selected, y_test)
 print(f"KNN - Accuracy: {knn_accuracy_selected:.4f}, F1 Score: {knn_f1_selected:.4f}, MCC: {knn_mcc_selected:.4f}")
+
+end_time_cfs_only = time.time()
+cfs_only_time_taken = end_time_cfs_only - start_time_cfs_only
+print(f"Time taken for CFS (without top 30%) and tests: {cfs_only_time_taken:.2f} seconds\n")
