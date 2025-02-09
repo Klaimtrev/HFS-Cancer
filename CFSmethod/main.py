@@ -1,10 +1,17 @@
 import time
+import sys
 from data_processing import load_and_preprocess_data
 from feature_selection import select_top_30_percent_features, cfs_selection
 from tests import test_decision_tree, test_knn
 
+if len(sys.argv) != 2:
+    print("Usage: python main.py <path_to_arff_file>")
+    sys.exit(1)
+
+file_path = sys.argv[1]
+
 # Load and preprocess the data
-X_train, X_test, y_train, y_test, df, label_encoder = load_and_preprocess_data('Datasets/AP_Colon_Kidney.arff')
+X_train, X_test, y_train, y_test, df, label_encoder = load_and_preprocess_data(file_path)
 
 # Timer for original dataset tests
 start_time_original = time.time()
