@@ -4,6 +4,19 @@
 
 This repository presents heuristic feature selection methods applied to cancer prediction using machine learning. The goal is to improve classification performance by selecting the most relevant features from gene expression data. The repository contains implementations of multiple feature selection techniques and evaluates their impact on different machine learning models.
 
+## Contents
+- [Heuristic Feature Selection Methods for Cancer Prediction](#heuristic-feature-selection-methods-for-cancer-prediction)
+  - [Overview](#overview)
+  - [Contents](#contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Directory Structure](#directory-structure)
+  - [Author](#author)
+  - [License](#license)
+  - [Acknowledgments](#acknowledgments)
+  - [References](#references)
+
 ## Features
 
 - **Feature Selection Techniques:** Includes heuristic-based methods to identify the most relevant features.
@@ -15,18 +28,23 @@ This repository presents heuristic feature selection methods applied to cancer p
 
 To run the project, ensure you have Python installed along with the necessary dependencies.
 
+1. Clone the repo
 ```sh
-git clone https://github.com/Klaimtrev/Heuristic-Feature-Selection-Methods-for-Cancer-Prediction.git
+git clone https://github.com/Klaimtrev/HFS-Cancer.git
 ```
+2. Move to the HFS-Cancer folder
 ```sh
-cd Heuristic-Feature-Selection-Methods-for-Cancer-Prediction
+cd HFS-Cancer
 ```
+3. Create a virtual environment
 ```sh
 python -m venv venv
 ```
+4. Activate the virtual environment
 ```sh
 venv\Scripts\activate
 ```
+5. Install the dependencies
 ```sh
 pip install -r requirements.txt
 ```
@@ -39,12 +57,11 @@ pip install -r requirements.txt
    ```
 2. Run the main file with a dataset:
    ```sh
-   python .\main.py filepath
+   python main.py filePath
    ```
    For example: 
    ```sh
-   python main.py "D:\0_RepoTesting\third\Heuristic-Feature-Selection-Methods-for-Cancer-Prediction\Datasets\AP_Breast_Colon.arff"
-
+   python main.py ../Datasets/AP_Breast_Kidney.arff
    ```
 
 ## Directory Structure
@@ -59,9 +76,6 @@ Heuristic-Feature-Selection-Methods-for-Cancer-Prediction/
 └── README.md           # Project documentation
 ```
 
-## Results
-
-The results include performance comparisons of different feature selection methods and machine learning models. The output files in the `results/` directory summarize the findings.
 
 ## Author
 
@@ -102,4 +116,6 @@ This work utilizes publicly available datasets for evaluation:
 |                                          |                    | Kidney (KIRC)           | 537     |
 | Leukemia (Golub, 1999)                  | 7128              | Leukemia                | 72      |
 
-
+OpenML: Includes multiple datasets from the expO (Expression Project For Oncology) repository.
+UCI Gene Expression Dataset: Contains RNA-Seq values for five cancer types.
+Leukemia dataset: Available from Golub's Leukemia study.

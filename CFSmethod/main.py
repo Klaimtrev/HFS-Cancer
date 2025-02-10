@@ -2,7 +2,7 @@ import time
 import sys
 from data_processing import load_and_preprocess_data
 from feature_selection import select_top_30_percent_features, cfs_selection
-from tests import test_decision_tree, test_knn
+from tests import test_decision_tree, test_knn,test_naive_bayes, test_svm, run_tests
 
 if len(sys.argv) != 2:
     print("Usage: python main.py <path_to_arff_file>")
@@ -18,11 +18,8 @@ start_time_original = time.time()
 
 # Train and evaluate models on the original dataset
 print("### Original Dataset Results ###")
-dt_accuracy, dt_f1, dt_mcc = test_decision_tree(X_train, y_train, X_test, y_test)
-print(f"Decision Tree - Accuracy: {dt_accuracy:.4f}, F1 Score: {dt_f1:.4f}, MCC: {dt_mcc:.4f}")
 
-knn_accuracy, knn_f1, knn_mcc = test_knn(X_train, y_train, X_test, y_test)
-print(f"KNN - Accuracy: {knn_accuracy:.4f}, F1 Score: {knn_f1:.4f}, MCC: {knn_mcc:.4f}\n")
+run_tests(X_train, y_train, X_test, y_test)
 
 end_time_original = time.time()
 original_time_taken = end_time_original - start_time_original
@@ -44,11 +41,8 @@ X_test_selected_top_30 = X_test_top_30[selected_feature_names_top_30]
 
 # Train and evaluate models on top 30% selected features
 print("### Selected Features Results (Top 30%) ###")
-dt_accuracy_selected_30, dt_f1_selected_30, dt_mcc_selected_30 = test_decision_tree(X_train_selected_top_30, y_train, X_test_selected_top_30, y_test)
-print(f"Decision Tree - Accuracy: {dt_accuracy_selected_30:.4f}, F1 Score: {dt_f1_selected_30:.4f}, MCC: {dt_mcc_selected_30:.4f}")
 
-knn_accuracy_selected_30, knn_f1_selected_30, knn_mcc_selected_30 = test_knn(X_train_selected_top_30, y_train, X_test_selected_top_30, y_test)
-print(f"KNN - Accuracy: {knn_accuracy_selected_30:.4f}, F1 Score: {knn_f1_selected_30:.4f}, MCC: {knn_mcc_selected_30:.4f}\n")
+run_tests(X_train, y_train, X_test, y_test)
 
 end_time_top_30 = time.time()
 top_30_time_taken = end_time_top_30 - start_time_top_30
@@ -65,12 +59,7 @@ X_test_selected = X_test[selected_feature_names]
 
 # Train and evaluate models on selected features (without 30%)
 print("### Selected Features Results (Without Top 30%) ###")
-dt_accuracy_selected, dt_f1_selected, dt_mcc_selected = test_decision_tree(X_train_selected, y_train, X_test_selected, y_test)
-print(f"Decision Tree - Accuracy: {dt_accuracy_selected:.4f}, F1 Score: {dt_f1_selected:.4f}, MCC: {dt_mcc_selected:.4f}")
-
-knn_accuracy_selected, knn_f1_selected, knn_mcc_selected = test_knn(X_train_selected, y_train, X_test_selected, y_test)
-print(f"KNN - Accuracy: {knn_accuracy_selected:.4f}, F1 Score: {knn_f1_selected:.4f}, MCC: {knn_mcc_selected:.4f}")
-
+run_tests(X_train, y_train, X_test, y_test)
 end_time_cfs_only = time.time()
 cfs_only_time_taken = end_time_cfs_only - start_time_cfs_only
 print(f"Time taken for CFS (without top 30%) and tests: {cfs_only_time_taken:.2f} seconds\n")
