@@ -11,7 +11,7 @@ if len(sys.argv) != 2:
 file_path = sys.argv[1]
 
 # Load and preprocess the data
-X_train, X_test, y_train, y_test, df, label_encoder = load_and_preprocess_data(file_path)
+X_train, X_test, y_train, y_test, df, label_encoder, correct_gene_ids = load_and_preprocess_data(file_path)
 
 # Timer for original dataset tests
 start_time_original = time.time()
@@ -30,7 +30,7 @@ start_time_top_30 = time.time()
 
 # Feature Selection with top 30%
 print("### Feature Selection (Top 30%) ###")
-top_30_percent_features = select_top_30_percent_features(X_train, y_train)
+top_30_percent_features = select_top_30_percent_features(X_train, y_train, correct_gene_ids)
 X_train_top_30 = X_train[top_30_percent_features['Feature']]
 X_test_top_30 = X_test[top_30_percent_features['Feature']]
 
@@ -42,7 +42,7 @@ X_test_selected_top_30 = X_test_top_30[selected_feature_names_top_30]
 # Train and evaluate models on top 30% selected features
 print("### Selected Features Results (Top 30%) ###")
 
-run_tests(X_train, y_train, X_test, y_test)
+run_tests(X_train_selected_top_30, y_train, X_test_selected_top_30, y_test)
 
 end_time_top_30 = time.time()
 top_30_time_taken = end_time_top_30 - start_time_top_30
@@ -59,7 +59,7 @@ X_test_selected = X_test[selected_feature_names]
 
 # Train and evaluate models on selected features (without 30%)
 print("### Selected Features Results (Without Top 30%) ###")
-run_tests(X_train, y_train, X_test, y_test)
+run_tests(X_train_selected, y_train, X_test_selected, y_test)
 end_time_cfs_only = time.time()
 cfs_only_time_taken = end_time_cfs_only - start_time_cfs_only
 print(f"Time taken for CFS (without top 30%) and tests: {cfs_only_time_taken:.2f} seconds\n")

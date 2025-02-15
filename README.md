@@ -1,11 +1,11 @@
-# Heuristic Feature Selection Methods for Cancer Prediction
+# Heuristic Feature Selection Method for Cancer Classification
 
 ## Overview
 
-This repository presents heuristic feature selection methods applied to cancer prediction using machine learning. The goal is to improve classification performance by selecting the most relevant features from gene expression data. The repository contains implementations of multiple feature selection techniques and evaluates their impact on different machine learning models.
+This repository presents heuristic feature selection methods applied to cancer classification using machine learning. The goal is to improve classification performance by selecting the most relevant features from gene expression data. The repository contains implementations of multiple feature selection techniques and evaluates their impact on different machine learning models.
 
 ## Contents
-- [Heuristic Feature Selection Methods for Cancer Prediction](#heuristic-feature-selection-methods-for-cancer-prediction)
+- [Heuristic Feature Selection Method for Cancer Classification](#heuristic-feature-selection-method-for-cancer-classification)
   - [Overview](#overview)
   - [Contents](#contents)
   - [Features](#features)
@@ -61,16 +61,15 @@ pip install -r requirements.txt
    ```
    For example: 
    ```sh
-   python main.py ../Datasets/AP_Breast_Kidney.arff
+   python main.py ../Datasets/leukemia_big.csv
    ```
 
 ## Directory Structure
 
 ```
 Heuristic-Feature-Selection-Methods-for-Cancer-Prediction/
-├── data/               # Datasets used for training and evaluation
-├── src/                # Source code for feature selection and model evaluation
-├── results/            # Output results and performance metrics
+├── Datasets/               # Datasets used for training and evaluation
+├── CFSMethod/                # Source code for feature selection and model evaluation
 ├── requirements.txt    # Dependencies
 ├── main.py             # Main script to run the project
 └── README.md           # Project documentation
